@@ -5,15 +5,27 @@
     using System;
     using System.IO;
     using System.Net;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     public class DeeksBot
     {
+        /// <summary>
+        /// The discord client
+        /// </summary>
         DiscordClient client;
+
+        /// <summary>
+        /// The commands service
+        /// </summary>
         CommandService commands;
+
+        /// <summary>
+        /// The token for connecting to the bot
+        /// </summary>
         private const string botToken = "";
 
+        /// <summary>
+        /// Initializes and instance of the DeeksBot
+        /// </summary>
         public DeeksBot()
         {
             client = new DiscordClient(input =>
@@ -31,7 +43,7 @@
             commands = client.GetService<CommandService>();
 
             RegisterSteamStatusCommand();
-            OsrsHighScoreChecker();
+            OsrsHighScoreCheckerCommand();
             DisplaySourceCommand();
             WowCharLookupCommand();
 
@@ -41,7 +53,10 @@
             });
         }
 
-        private void OsrsHighScoreChecker()
+        /// <summary>
+        /// Gets the highscore for the supplied user and writes it as a message on the channel
+        /// </summary>
+        private void OsrsHighScoreCheckerCommand()
         {
             commands.CreateCommand("osrs").Parameter("name", ParameterType.Multiple).Do(async (e) =>
             {
@@ -50,6 +65,11 @@
             });
         }
 
+        /// <summary>
+        /// Retrieves the highscores of the user through http request and uses the RunescapePlayer to generate a formatted string
+        /// </summary>
+        /// <param name="e">The commandEventArgs from the calling command</param>
+        /// <returns></returns>
         private string GetOsrsHighScore(CommandEventArgs e)
         {
             var username = e.Args[0];
@@ -87,6 +107,9 @@
             return rsPlayer.RunescapePlayerInfoFormatted();
         }
        
+        /// <summary>
+        /// A command that displays the github repo for the bots code
+        /// </summary>
         private void DisplaySourceCommand()
         {
             commands.CreateCommand("Source").Do(async (e) =>
@@ -95,6 +118,9 @@
             });
         }
 
+        /// <summary>
+        /// A command that links to the downdetector website for steam
+        /// </summary>
         private void RegisterSteamStatusCommand()
         {
             commands.CreateCommand("Steam").Do(async (e) =>
@@ -114,6 +140,11 @@
             });
         }
 
+        /// <summary>
+        /// Log publisher
+        /// </summary>
+        /// <param name="sender">The bot</param>
+        /// <param name="e">The log message event args</param>
         private void Log(object sender, LogMessageEventArgs e)
         {
             Console.WriteLine(e.Message);

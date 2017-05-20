@@ -1,12 +1,9 @@
-﻿using DeeksBot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DeeksBot
+﻿namespace DeeksBot
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public enum Skill
     {
         Overall,
