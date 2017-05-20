@@ -5,6 +5,7 @@
     using System;
     using System.IO;
     using System.Net;
+    using System.Linq;
 
     public class DeeksBot
     {
@@ -41,6 +42,23 @@
             });
 
             commands = client.GetService<CommandService>();
+
+            client.UserJoined += async (s, e) =>
+            {
+                var channel = e.Server.FindChannels("general", ChannelType.Text).FirstOrDefault();
+                var user = e.User;
+
+                await channel.SendMessage($"{user.Name} has joined the channel!");
+            };
+
+            client.UserLeft += async (s, e) =>
+            {
+                var channel = e.Server.FindChannels("general", ChannelType.Text).FirstOrDefault();
+                var user = e.User;
+
+                await channel.SendMessage($"{user.Name} has left the channel!");
+            };
+            
 
             RegisterSteamStatusCommand();
             OsrsHighScoreCheckerCommand();
