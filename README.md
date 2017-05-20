@@ -1,5 +1,6 @@
 # DeeksBot
 Start of a discord bot just to play around with c# and discord. 
+Coding with Storm youtube tutorials used to get started, check them out (https://www.youtube.com/playlist?list=PLkrXZ4mxBnn04nW3PxMmpjtZGXZYolJAj)
 
 
 ### Current Commands
