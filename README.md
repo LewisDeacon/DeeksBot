@@ -7,3 +7,4 @@ Coding with Storm youtube tutorials used to get started, check them out (https:/
 - !steam - Check the status of Steam at http://downdetector.com/status/steam
 - !osrs username - Check your osrs highscores, replace username with your osrs username
 - !source - Links to this repository
+- !wow server charactername - Opens wow armoury for the chosen character
