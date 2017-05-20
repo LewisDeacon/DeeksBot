@@ -12,7 +12,7 @@
     {
         DiscordClient client;
         CommandService commands;
-        private const string botToken = "ADD BOT TOKEN HERE";
+        private const string botToken = "";
 
         public DeeksBot()
         {
@@ -33,6 +33,7 @@
             RegisterSteamStatusCommand();
             OsrsHighScoreChecker();
             DisplaySourceCommand();
+            WowCharLookupCommand();
 
             client.ExecuteAndWait(async () =>
             {
@@ -90,14 +91,26 @@
         {
             commands.CreateCommand("Source").Do(async (e) =>
             {
-                await e.Channel.SendMessage("http://downdetector.com/status/steam");
+                await e.Channel.SendMessage("https://github.com/LewisDeacon/DeeksBot");
             });
         }
+
         private void RegisterSteamStatusCommand()
         {
             commands.CreateCommand("Steam").Do(async (e) =>
             {
                 await e.Channel.SendMessage("http://downdetector.com/status/steam");
+            });
+        }
+
+        /// <summary>
+        /// Create the command for the keyword wow which does a lookup on the provided name at battle.net armoury
+        /// </summary>
+        private void WowCharLookupCommand()
+        {
+            commands.CreateCommand("wow").Parameter("charname", ParameterType.Multiple).Do(async (e) =>
+            {
+                await e.Channel.SendMessage($"Character lookup for {e.Args[1]}\n https://worldofwarcraft.com/en-gb/character/{e.Args[0]}/{e.Args[1]}");
             });
         }
 
